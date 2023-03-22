@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { createValidator } = require("express-joi-validation");
+const controllerWrapper = require("../../helpers/controllerWrapper");
 
 const {
   getListContacts,
@@ -17,14 +18,22 @@ const {
 
 const validator = createValidator();
 
-router.get("/", getListContacts);
+router.get("/", controllerWrapper(getListContacts));
 
-router.get("/:id", getContactById);
+router.get("/:id", controllerWrapper(getContactById));
 
-router.delete("/:id", removeContact);
+router.delete("/:id", controllerWrapper(removeContact));
 
-router.post("/", validator.body(contactAddSchema), addContact);
+router.post(
+  "/",
+  validator.body(contactAddSchema),
+  controllerWrapper(addContact)
+);
 
-router.put("/:id", validator.body(contactUpdateSchema), updateContactById);
+router.put(
+  "/:id",
+  validator.body(contactUpdateSchema),
+  controllerWrapper(updateContactById)
+);
 
 module.exports = router;
