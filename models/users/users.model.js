@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
-const userSchema = mongoose.Schema(
+const userSchema = Schema(
   {
     name: {
       type: String,
@@ -21,25 +21,24 @@ const userSchema = mongoose.Schema(
       required: [true, "Role is required"],
       enum: ["Patient", "Doctor"],
     },
-    rating: {
-      type: Number,
-    },
+
+    rating: Number,
+
     experience: {
       institution: { type: String },
       description: { type: String },
       startDate: { type: String },
       endDate: { type: String },
     },
-    token: { type: String },
+    token: String,
 
-    avatarURL: {
-      type: String,
-    },
+    avatarURL: String,
+
     verify: {
       type: Boolean,
       default: false,
     },
-    verificationCode: {
+    verificationToken: {
       type: String,
       default: "",
     },
@@ -51,6 +50,7 @@ const registerSchema = Joi.object({
   name: Joi.string().required(),
   number: Joi.string().required(),
   password: Joi.string().min(3).required(),
+  role: Joi.string().required(),
 });
 
 const loginSchema = Joi.object({
@@ -58,5 +58,5 @@ const loginSchema = Joi.object({
   password: Joi.string().min(3).required(),
 });
 
-const User = mongoose.model("User", userSchema);
+const User = model("user", userSchema);
 module.exports = { User, registerSchema, loginSchema };
