@@ -4,7 +4,6 @@ const {
   authorizeMiddleware,
 } = require("../../middlewares");
 const { controllerWrapper } = require("../../helpers");
-// const { login, register, logout } = require("../../controllers/auth");
 const { auth } = require("../../controllers/index");
 const {
   registerSchema,
