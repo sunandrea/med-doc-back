@@ -5,6 +5,7 @@ const cors = require("cors");
 const { errorFilter } = require("./middlewares/index");
 
 const authRouter = require("./routes/api/auth");
+const infoRouter = require("./routes/api/info");
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
+app.use("/api", infoRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });

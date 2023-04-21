@@ -1,16 +1,36 @@
 const express = require("express");
-import { authorizeMiddleware } from "../../middlewares";
+const { authorizeMiddleware } = require("../../middlewares");
+const { info } = require("../../controllers/index");
+const controllerWrapper = require("../../helpers/controllerWrapper");
 
 const router = express.Router();
 
-router.get("/info", authorizeMiddleware);
+router.get("/info", authorizeMiddleware, controllerWrapper(info.currentUser));
 
-router.get("/info/:id", authorizeMiddleware);
+router.get(
+  "/info/:id",
+  authorizeMiddleware,
+  controllerWrapper(info.findUserById)
+);
 
-router.get("/info/all/:role", authorizeMiddleware);
+router.get(
+  "/info/all/:role",
+  authorizeMiddleware,
+  controllerWrapper(info.findUsersByRole)
+);
 
-router.post("/info/update/image", authorizeMiddleware);
+router.patch("/info/update/image", authorizeMiddleware);
 
-router.post("/info/update", authorizeMiddleware);
+router.patch(
+  "/info/update",
+  authorizeMiddleware,
+  controllerWrapper(info.updateUserInfo)
+);
 
-router.post("/nfo/update/rating", authorizeMiddleware);
+router.patch(
+  "/info/update/rating",
+  authorizeMiddleware,
+  controllerWrapper(info.UpdateUserRating)
+);
+
+module.exports = router;
