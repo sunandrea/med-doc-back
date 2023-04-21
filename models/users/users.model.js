@@ -22,14 +22,36 @@ const userSchema = Schema(
       enum: ["Patient", "Doctor"],
     },
 
-    rating: Number,
-
-    experience: {
-      institution: { type: String },
-      description: { type: String },
-      startDate: { type: String },
-      endDate: { type: String },
+    rating: {
+      type: Number,
     },
+    coast: {
+      type: Number,
+    },
+    about: {
+      type: String,
+    },
+    specialization: {
+      type: String,
+    },
+    category: {
+      type: String,
+    },
+    gender: {
+      type: String,
+    },
+    birthday: {
+      type: Date,
+    },
+
+    experience: [
+      {
+        institution: { type: String },
+        description: { type: String },
+        startDate: { type: String },
+        endDate: { type: String },
+      },
+    ],
     token: String,
 
     avatarURL: String,

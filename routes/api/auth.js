@@ -1,16 +1,29 @@
 const express = require("express");
-const { validationMiddleware } = require("../../middlewares");
+const {
+  validationMiddleware,
+  authorizeMiddleware,
+} = require("../../middlewares");
 const { controllerWrapper } = require("../../helpers");
-const { login, register } = require("../../controllers/auth");
-const { registerSchema, loginSchema } = require("../../models/users/users.model");
+// const { login, register, logout } = require("../../controllers/auth");
+const { auth } = require("../../controllers/index");
+const {
+  registerSchema,
+  loginSchema,
+} = require("../../models/users/users.model");
 
 const router = express.Router();
 
 router.post(
   "/register",
   validationMiddleware(registerSchema),
-  controllerWrapper(register)
+  controllerWrapper(auth.register)
 );
-router.post("/login", validationMiddleware(loginSchema), controllerWrapper(login));
+router.post(
+  "/login",
+  validationMiddleware(loginSchema),
+  controllerWrapper(auth.login)
+);
+
+router.get("/logout", authorizeMiddleware, controllerWrapper(auth.logout));
 
 module.exports = router;

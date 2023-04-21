@@ -1,5 +1,5 @@
 const controllerWrapper = require("./controllerWrapper.js");
-const createError = require("./createError");
+const createError = require("./createError.js");
 const { sign, verify } = require("./jwt");
 
 module.exports = {

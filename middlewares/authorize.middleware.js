@@ -5,7 +5,7 @@ const { JWT_SECRET } = process.env.JWT_SECRET;
 const authorizeMiddleware = async (req, res, next) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
-  const User = require("../models/user/users.model");
+  const { User } = require("../models/users/users.model");
 
   if (bearer !== "Bearer" || !token) {
     next(createError(401, "Authorization header is invalid"));
@@ -13,7 +13,6 @@ const authorizeMiddleware = async (req, res, next) => {
 
   try {
     const { id } = verify(token, JWT_SECRET);
-
     const user = await User.findById(id);
 
     if (!user.token) {
