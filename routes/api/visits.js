@@ -6,7 +6,10 @@ const {
 } = require("../../middlewares");
 const { controllerWrapper } = require("../../helpers");
 const { visits } = require("../../controllers");
-const { visitAddSchema } = require("../../models/visits.model");
+const {
+  visitAddSchema,
+  visitUpdateSchema,
+} = require("../../models/visits.model");
 
 router.post(
   "/",
@@ -14,5 +17,12 @@ router.post(
   validationMiddleware(visitAddSchema),
   controllerWrapper(visits.addVisit)
 );
+router.get("/", authorizeMiddleware, controllerWrapper(visits.getAllVisits));
 
+router.patch(
+  "/:id",
+  authorizeMiddleware,
+  validationMiddleware(visitUpdateSchema),
+  controllerWrapper(visits.updateVisit)
+);
 module.exports = router;

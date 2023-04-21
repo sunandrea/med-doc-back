@@ -1,6 +1,11 @@
+const { default: mongoose } = require("mongoose");
 const { Visit } = require("../../models/visits.model");
 
 const addVisit = async (req, res, next) => {
+  const patientObjectId = mongoose.Types.ObjectId.createFromHexString(
+    req.body.patient
+  );
+
   const visit = await Visit.create({
     complaints: req.body.complaints,
     medicalHistory: req.body.medicalHistory,
@@ -9,7 +14,8 @@ const addVisit = async (req, res, next) => {
     bodyCondition: req.body.bodyCondition,
     clinicalDiagnosis: req.body.clinicalDiagnosis,
     recomendation: req.body.recomendation,
-    owner: req.user._id,
+    doctor: req.user._id,
+    patient: patientObjectId,
     date: req.body.date,
   });
   res.status(201).json(visit);

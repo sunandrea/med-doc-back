@@ -37,7 +37,7 @@ const visitSchema = Schema(
       type: Schema.Types.ObjectId,
       required: true,
     },
-    owner: {
+    doctor: {
       type: Schema.Types.ObjectId,
       ref: "user",
     },
@@ -54,7 +54,18 @@ const visitAddSchema = Joi.object({
   clinicalDiagnosis: Joi.string().required().min(1),
   recomendation: Joi.string().required().min(1),
   date: Joi.date().min(1),
+  patient: Joi.string(),
+});
+
+const visitUpdateSchema = Joi.object({
+  complaints: Joi.string().min(1).optional(),
+  medicalHistory: Joi.string().min(1).optional(),
+  objectiveCondition: Joi.string().min(1).optional(),
+  associatedDiseases: Joi.string().min(1).optional(),
+  bodyCondition: Joi.string().min(1).optional(),
+  clinicalDiagnosis: Joi.string().min(1).optional(),
+  recomendation: Joi.string().min(1).optional(),
 });
 
 const Visit = model("visit", visitSchema);
-module.exports = { Visit, visitAddSchema };
+module.exports = { Visit, visitAddSchema, visitUpdateSchema };

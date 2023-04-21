@@ -1,3 +1,4 @@
 const addVisit = require("./addNewVisit");
-
-module.exports = { addVisit };
+const getAllVisits = require("./getAllVisits");
+const updateVisit = require("./updateVisit");
+module.exports = { addVisit, getAllVisits, updateVisit };
