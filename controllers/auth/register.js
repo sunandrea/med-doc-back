@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
 const { uuid } = require("uuidv4");
 const { Conflict } = require("http-errors");
-const { User } = require("../../models/users/users.model");
+const { User } = require("../../models/users.model");
 
 const register = async (req, res) => {
   const { name, number, password, role } = req.body;
