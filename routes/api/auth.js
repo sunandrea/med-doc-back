@@ -5,10 +5,7 @@ const {
 } = require("../../middlewares");
 const { controllerWrapper } = require("../../helpers");
 const { auth } = require("../../controllers/index");
-const {
-  registerSchema,
-  loginSchema,
-} = require("../../models/users/users.model");
+const { registerSchema, loginSchema } = require("../../models/users.model");
 
 const router = express.Router();
 
