@@ -1,5 +1,5 @@
 const { createError } = require("../../helpers/createError");
-const { User } = require("../../models/users/users.model");
+const { User } = require("../../models/users.model");
 
 const logout = async (req, res, next) => {
   const existingUser = await User.findById(req.user.id);

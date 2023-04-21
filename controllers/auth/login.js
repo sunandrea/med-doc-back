@@ -2,7 +2,7 @@ const { Unauthorized } = require("http-errors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { User } = require("../../models/users/users.model");
+const { User } = require("../../models/users.model");
 const { JWT_SECRET } = process.env;
 
 const login = async (req, res) => {

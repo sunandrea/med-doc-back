@@ -6,10 +6,7 @@ const {
 const { controllerWrapper } = require("../../helpers");
 // const { login, register, logout } = require("../../controllers/auth");
 const { auth } = require("../../controllers/index");
-const {
-  registerSchema,
-  loginSchema,
-} = require("../../models/users/users.model");
+const { registerSchema, loginSchema } = require("../../models/users.model");
 
 const router = express.Router();
 
