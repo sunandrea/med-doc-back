@@ -6,7 +6,7 @@ const { errorFilter } = require("./middlewares/index");
 
 const authRouter = require("./routes/api/auth");
 const infoRouter = require("./routes/api/info");
-const { visitRouter } = require("./routes/api");
+const { visitRouter, appointmentRouter } = require("./routes/api");
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -19,6 +19,7 @@ app.use("/api/auth", authRouter);
 app.use("/api", infoRouter);
 
 app.use("/api/visits", visitRouter);
+app.use("/api/appointment", appointmentRouter);
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
