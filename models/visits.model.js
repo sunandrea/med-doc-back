@@ -35,6 +35,7 @@ const visitSchema = Schema(
     },
     patient: {
       type: Schema.Types.ObjectId,
+      ref: "user",
       required: true,
     },
     doctor: {
