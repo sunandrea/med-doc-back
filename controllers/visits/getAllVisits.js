@@ -23,7 +23,6 @@ const getAllVisits = async (req, res, next) => {
       .populate({ path: "doctor", select: "name number" })
       .populate({ path: "patient", select: "name number" });
   }
-  console.log(visits);
   res.status(200).json(visits);
 };
 
