@@ -5,6 +5,7 @@ const cors = require("cors");
 const { errorFilter } = require("./middlewares/index");
 
 const authRouter = require("./routes/api/auth");
+const infoRouter = require("./routes/api/info");
 const { visitRouter } = require("./routes/api");
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
+app.use("/api", infoRouter);
 
 app.use("/api/visits", visitRouter);
 app.use((req, res) => {
