@@ -43,6 +43,12 @@ const userSchema = Schema(
     birthday: {
       type: Date,
     },
+    allRating: [
+      {
+        user: Schema.Types.ObjectId,
+        rating: Number,
+      },
+    ],
 
     experience: [
       {
