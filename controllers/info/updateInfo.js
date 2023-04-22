@@ -4,7 +4,7 @@ const updateUserInfo = async (req, res) => {
   const user = req.user;
   const newData = req.body;
 
-  newUser = { ...user._doc, ...newData };
+  const newUser = { ...user._doc, ...newData };
   if (JSON.stringify(user) === JSON.stringify(newUser)) {
     return res.status(400).json({ message: "Data not modified" });
   }
