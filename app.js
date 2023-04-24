@@ -8,6 +8,8 @@ const { errorFilter } = require("./middlewares/index");
 
 const authRouter = require("./routes/api/auth");
 const infoRouter = require("./routes/api/info");
+
+const experienceRouter = require("./routes/api/experience");
 const { visitRouter, appointmentRouter } = require("./routes/api");
 
 const app = express();
@@ -19,8 +21,8 @@ app.use(express.json());
 
 app.use("/api/auth", authRouter);
 app.use("/api", infoRouter);
-
 app.use("/api/visits", visitRouter);
+app.use("/api/experience", experienceRouter);
 app.use("/api/appointment", appointmentRouter);
 app.use("/api-docs", swaggerUi.serve);
 app.get("/api-docs", swaggerUi.setup(swaggerDocument));

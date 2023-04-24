@@ -8,20 +8,25 @@ const UpdateUserRating = async (req, res) => {
   const currentUserRating = doctor.allRating.find(
     (element) => element.user.toString() === user._id.toString()
   );
-  console.log(currentUserRating);
+  console.log(currentUserRating.rating);
 
-  if (!newRating) {
-    if (!currentUserRating) {
-      return res.status(200).json({ rating: 0 });
-    } else {
-      return res.status(200).json({ rating: currentUserRating.rating });
-    }
+  // if (!newRating) {
+  //   if (!currentUserRating) {
+  //     return res.status(200).json({ rating: 0 });
+  //   } else {
+  //     return res.status(200).json({ rating: currentUserRating.rating });
+  //   }
+  // }
+
+  if (currentUserRating) {
+    currentUserRating.rating = newRating;
+  } else {
+    doctor.allRating.push({
+      user: user._id,
+      rating: newRating,
+    });
   }
 
-  doctor.allRating.push({
-    user: user._id,
-    rating: newRating,
-  });
   let sumRating = 0;
 
   for (let i = 0; i < doctor.allRating.length; i++) {
