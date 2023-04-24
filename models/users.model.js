@@ -54,9 +54,8 @@ const userSchema = Schema(
       {
         institution: { type: String },
         description: { type: String },
-        startDate: { type: Date },
-        endDate: { type: Date },
-        // 2022-04-23
+        startDate: { type: String },
+        endDate: { type: String },
       },
     ],
     token: String,
