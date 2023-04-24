@@ -7,17 +7,9 @@ const router = express.Router();
 
 router.get("/info", authorizeMiddleware, controllerWrapper(info.currentUser));
 
-router.get(
-  "/info/:id",
-  authorizeMiddleware,
-  controllerWrapper(info.findUserById)
-);
+router.get("/info/:id", controllerWrapper(info.findUserById));
 
-router.get(
-  "/info/all/:role",
-  authorizeMiddleware,
-  controllerWrapper(info.findUsersByRole)
-);
+router.get("/info/all/:role", controllerWrapper(info.findUsersByRole));
 
 router.patch("/info/update/image", authorizeMiddleware);
 
