@@ -1,0 +1,420 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Med Dom API",
+    "version": "1.0.0",
+    "description": "API for Med Doc app"
+  },
+  "servers": [
+    {
+      "url": "https://meddoc-backend.herokuapp.com/"
+    }
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User registration",
+        "description": "Create new user account",
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered"
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "409": {
+            "description": "Number in use"
+          }
+        }
+      }
+    },
+    "api/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User login",
+        "description": "User authentication",
+        "requestBody": {
+          "description": "Authentication's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User Authorized"
+          },
+          "401": {
+            "description": "Unauthorized(invalid request body)"
+          }
+        }
+      }
+    },
+    "api/auth/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Logout",
+
+        "responses": {
+          "204": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Invalid token"
+          }
+        }
+      }
+    },
+    "api/info": {
+      "get": {
+        "tags": ["Info"],
+        "summary": "get user info",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Invalid token/Unauthorized "
+          }
+        }
+      }
+    },
+    "api/info{id}": {
+      "get": {
+        "tags": ["Info"],
+        "summary": "get user info",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found(There is not have user with this id)"
+          }
+        }
+      }
+    },
+    "api/info/all{role}": {
+      "get": {
+        "tags": ["Info"],
+        "summary": "get all users for role",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found(bad req params)"
+          }
+        }
+      }
+    },
+    "api/info/update": {
+      "patch": {
+        "tags": ["Info"],
+        "summary": "update user info",
+        "requestBody": {
+          "description": "Update's object",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "api/info/update/rating": {
+      "patch": {
+        "tags": ["Info"],
+        "summary": "update user info",
+        "requestBody": {
+          "description": "Update's object",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRating"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "api/appointment": {
+      "get": {
+        "tags": ["Appointment"],
+        "summary": "get user's appointment",
+
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Appointment"],
+        "summary": "get user's appointment",
+        "requestBody": {
+          "description": "Update's object",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppointment"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "api/appointment{id}": {
+      "get": {
+        "tags": ["Appointment"],
+        "summary": "get user's appointment by id",
+
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "api/visits": {
+      "get": {
+        "tags": ["Visits"],
+        "summary": "get user's visits",
+
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Visits"],
+        "summary": "add new vist",
+        "requestBody": {
+          "description": "Update's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddVisit"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "api/visits{id}": {
+      "patch": {
+        "tags": ["Visits"],
+        "summary": "update user info",
+        "requestBody": {
+          "description": "Update's object",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddVisit"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "Register": {
+        "type": "object",
+        "required": ["name", "password", "number"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Joe Biden"
+          },
+          "password": {
+            "type": "string",
+            "example": "mypassword"
+          },
+          "number": {
+            "type": "string",
+            "example": "+38099999999"
+          },
+          "role": {
+            "type": "string",
+            "example": "Doctor"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "required": ["name", "password", "number"],
+        "properties": {
+          "number": {
+            "type": "string",
+            "example": "+38099999999"
+          },
+
+          "password": {
+            "type": "string",
+            "example": "mypassword"
+          }
+        }
+      },
+      "UpdateInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Joe Biden"
+          },
+          "gender": {
+            "type": "string",
+            "example": "Male"
+          },
+          "birthday": {
+            "type": "string",
+            "example": "11/09/11"
+          },
+          "number": {
+            "type": "string",
+            "example": "+380999999999"
+          }
+        }
+      },
+      "UpdateRating": {
+        "type": "object",
+        "required": ["id", "rating"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "64417972d4e00b5a6bb8389a"
+          },
+
+          "rating": {
+            "type": "number",
+            "example": 5
+          }
+        }
+      },
+      "AddAppointment": {
+        "type": "object",
+        "required": ["doctor", "date", "time"],
+        "properties": {
+          "doctor": {
+            "type": "string",
+            "example": "Doctor id -> 64417972d4e00b5a6bb8389a"
+          },
+
+          "specialization": {
+            "type": "string",
+            "example": "Therapeut"
+          },
+          "time": {
+            "type": "string",
+            "example": "10:30-11:300"
+          },
+          "date": {
+            "type": "string",
+            "example": "22/02/2022"
+          }
+        }
+      },
+      "AddVisit": {
+        "type": "object",
+        "required": [
+          "complaints",
+          "medicalHistory",
+          "objectiveCondition",
+          "associatedDiseases,",
+          "bodyCondition",
+          "clinicalDiagnosis",
+          "recomendation",
+          "patient",
+          "date"
+        ],
+        "properties": {
+          "complaints": {
+            "type": "string",
+            "example": "Text"
+          },
+
+          "medicalHistory": {
+            "type": "string",
+            "example": "Text"
+          },
+          "objectiveCondition": {
+            "type": "string",
+            "example": "text"
+          },
+          "bodyCondition": {
+            "type": "string",
+            "example": "Text"
+          },
+          "clinicalDiagnosis": {
+            "type": "string",
+            "example": "Text"
+          },
+          "recomendation": {
+            "type": "string",
+            "example": "Text"
+          },
+          "patient": {
+            "type": "string",
+            "example": "64417972d4e00b5a6bb8389a"
+          },
+          "date": {
+            "type": "string",
+            "example": "22/02/2022"
+          }
+        }
+      }
+    }
+  }
+}

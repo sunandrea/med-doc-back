@@ -5,7 +5,6 @@ const UpdateUserRating = async (req, res) => {
   const newRating = req.body.rating;
 
   const doctor = await User.findById(req.body.id);
-
   const currentUserRating = doctor.allRating.find(
     (element) => element.user.toString() === user._id.toString()
   );
