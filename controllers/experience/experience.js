@@ -11,11 +11,12 @@ const updateExperienceInfo = async (req, res) => {
   const newExperience = req.body;
 
   if (req.body.id) {
+    console.log(req.body);
     saveExperience = userExperience.find((el, i) => {
       if (el._id.toString() === req.body.id.toString()) {
         saveExperienceIndex = i;
       }
-      return el._id.toString() === req.body.id.toString(); // gavno
+      return el._id.toString() === req.body.id.toString();
     });
   }
 
