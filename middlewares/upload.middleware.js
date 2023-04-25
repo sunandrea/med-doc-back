@@ -12,7 +12,9 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "avatars",
-    transformation: [{ width: 150, height: 150, gravity: "face", crop: "thumb" }],
+    transformation: [
+      { width: 150, height: 150, gravity: "face", crop: "thumb" },
+    ],
   },
   allowedFormats: ["jpg", "png"],
   filename: (req, file, cb) => {
