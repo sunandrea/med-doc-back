@@ -20,7 +20,11 @@ router.patch(
   updateImage
 );
 
-router.patch("/info/update", authorizeMiddleware, controllerWrapper(info.updateUserInfo));
+router.patch(
+  "/info/update",
+  authorizeMiddleware,
+  controllerWrapper(info.updateUserInfo)
+);
 
 router.patch(
   "/info/update/rating",
