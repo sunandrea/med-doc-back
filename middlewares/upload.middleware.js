@@ -10,7 +10,10 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  folder: "avatars",
+  params: {
+    folder: "avatars",
+    transformation: [{ width: 150, height: 150, gravity: "face", crop: "thumb" }],
+  },
   allowedFormats: ["jpg", "png"],
   filename: (req, file, cb) => {
     cb(null, file.originalname);
