@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Med Dom API",
+    "title": "Med Doc API",
     "version": "1.0.0",
     "description": "API for Med Doc app"
   },
@@ -95,7 +95,7 @@
         }
       }
     },
-    "api/info{id}": {
+    "api/info/{id}": {
       "get": {
         "tags": ["Info"],
         "summary": "get user info",
@@ -109,7 +109,7 @@
         }
       }
     },
-    "api/info/all{role}": {
+    "api/info/all/{role}": {
       "get": {
         "tags": ["Info"],
         "summary": "get all users for role",
@@ -126,7 +126,7 @@
     "api/info/update": {
       "patch": {
         "tags": ["Info"],
-        "summary": "update user info",
+        "summary": "update user's info",
         "requestBody": {
           "description": "Update's object",
           "required": false,
@@ -145,10 +145,32 @@
         }
       }
     },
+    "api/info/update/image": {
+      "patch": {
+        "tags": ["Info"],
+        "summary": "update user's avatar",
+        "requestBody": {
+          "description": "Update's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateImage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
     "api/info/update/rating": {
       "patch": {
         "tags": ["Info"],
-        "summary": "update user info",
+        "summary": "update user's info",
         "requestBody": {
           "description": "Update's object",
           "required": false,
@@ -200,7 +222,7 @@
         }
       }
     },
-    "api/appointment{id}": {
+    "api/appointment/{id}": {
       "get": {
         "tags": ["Appointment"],
         "summary": "get user's appointment by id",
@@ -244,7 +266,7 @@
         }
       }
     },
-    "api/visits{id}": {
+    "api/visits/{id}": {
       "patch": {
         "tags": ["Visits"],
         "summary": "update user info",
@@ -304,6 +326,16 @@
           "password": {
             "type": "string",
             "example": "mypassword"
+          }
+        }
+      },
+      "UpdateImage": {
+        "type": "object",
+        "required": ["image"],
+        "properties": {
+          "image": {
+            "type": "file",
+            "example": "/path/image/"
           }
         }
       },

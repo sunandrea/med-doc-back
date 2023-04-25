@@ -7,23 +7,27 @@ const { updateImage } = require("../../controllers/info");
 
 const router = express.Router();
 
-router.get("/info", authorizeMiddleware, controllerWrapper(info.currentUser));
+router.get("/", authorizeMiddleware, controllerWrapper(info.currentUser));
 
-router.get("/info/:id", controllerWrapper(info.findUserById));
+router.get("/:id", controllerWrapper(info.findUserById));
 
-router.get("/info/all/:role", controllerWrapper(info.findUsersByRole));
+router.get("/all/:role", controllerWrapper(info.findUsersByRole));
 
 router.patch(
-  "/info/update/image",
+  "/update/image",
   authorizeMiddleware,
   uploadCloud.single("image"),
   updateImage
 );
 
-router.patch("/info/update", authorizeMiddleware, controllerWrapper(info.updateUserInfo));
+router.patch(
+  "/update",
+  authorizeMiddleware,
+  controllerWrapper(info.updateUserInfo)
+);
 
 router.patch(
-  "/info/update/rating",
+  "/update/rating",
   authorizeMiddleware,
   controllerWrapper(info.UpdateUserRating)
 );
