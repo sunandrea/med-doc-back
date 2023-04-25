@@ -2,6 +2,8 @@ const express = require("express");
 const { authorizeMiddleware } = require("../../middlewares");
 const { info } = require("../../controllers/index");
 const controllerWrapper = require("../../helpers/controllerWrapper");
+const uploadCloud = require("../../middlewares/upload.middleware");
+const { updateImage } = require("../../controllers/info");
 
 const router = express.Router();
 
@@ -11,13 +13,14 @@ router.get("/info/:id", controllerWrapper(info.findUserById));
 
 router.get("/info/all/:role", controllerWrapper(info.findUsersByRole));
 
-router.patch("/info/update/image", authorizeMiddleware);
-
 router.patch(
-  "/info/update",
+  "/info/update/image",
   authorizeMiddleware,
-  controllerWrapper(info.updateUserInfo)
+  uploadCloud.single("image"),
+  updateImage
 );
+
+router.patch("/info/update", authorizeMiddleware, controllerWrapper(info.updateUserInfo));
 
 router.patch(
   "/info/update/rating",
