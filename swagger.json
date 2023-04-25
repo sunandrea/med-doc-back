@@ -126,7 +126,7 @@
     "api/info/update": {
       "patch": {
         "tags": ["Info"],
-        "summary": "update user info",
+        "summary": "update user's info",
         "requestBody": {
           "description": "Update's object",
           "required": false,
@@ -145,10 +145,32 @@
         }
       }
     },
+    "api/info/update/image": {
+      "patch": {
+        "tags": ["Info"],
+        "summary": "update user's avatar",
+        "requestBody": {
+          "description": "Update's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateImage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
     "api/info/update/rating": {
       "patch": {
         "tags": ["Info"],
-        "summary": "update user info",
+        "summary": "update user's info",
         "requestBody": {
           "description": "Update's object",
           "required": false,
@@ -304,6 +326,16 @@
           "password": {
             "type": "string",
             "example": "mypassword"
+          }
+        }
+      },
+      "UpdateImage": {
+        "type": "object",
+        "required": ["image"],
+        "properties": {
+          "image": {
+            "type": "file",
+            "example": "/path/image/"
           }
         }
       },
