@@ -287,6 +287,69 @@
           }
         }
       }
+    },
+    "api/experience/": {
+      "post": {
+        "tags": ["Experience"],
+        "summary": "add user experience",
+        "requestBody": {
+          "description": "Experiens object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddExperience"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "api/experience/{id}": {
+      "patch": {
+        "tags": ["Experience"],
+        "summary": "update user's experience",
+        "requestBody": {
+          "description": "Experiens",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddExperience"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Experience"],
+        "summary": "delete user's experience",
+
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
     }
   },
 
@@ -442,6 +505,29 @@
             "example": "64417972d4e00b5a6bb8389a"
           },
           "date": {
+            "type": "string",
+            "example": "22/02/2022"
+          }
+        }
+      },
+      "AddExperience": {
+        "type": "object",
+        "required": ["doctor", "date", "time"],
+        "properties": {
+          "specialization": {
+            "type": "string",
+            "example": "Text"
+          },
+
+          "doctor": {
+            "type": "string",
+            "example": "Text"
+          },
+          "date": {
+            "type": "string",
+            "example": "10:30-11:300"
+          },
+          "time": {
             "type": "string",
             "example": "22/02/2022"
           }

@@ -1,10 +1,25 @@
 const express = require("express");
 const { authorizeMiddleware } = require("../../middlewares");
 const controllerWrapper = require("../../helpers/controllerWrapper");
-const updateExperienceInfo = require("../../controllers/experience/index");
+const { experience } = require("../../controllers");
 
 const router = express.Router();
 
-router.patch("/", authorizeMiddleware, controllerWrapper(updateExperienceInfo));
+router.post(
+  "/",
+  authorizeMiddleware,
+  controllerWrapper(experience.addExperience)
+);
 
+router.patch(
+  "/:id",
+  authorizeMiddleware,
+  controllerWrapper(experience.updateExperience)
+);
+
+router.delete(
+  "/:id",
+  authorizeMiddleware,
+  controllerWrapper(experience.deleteExperience)
+);
 module.exports = router;
