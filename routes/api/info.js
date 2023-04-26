@@ -27,9 +27,9 @@ router.patch(
 );
 
 router.patch(
-  "/update/rating",
+  "/update/rating/:id",
   authorizeMiddleware,
-  controllerWrapper(info.UpdateUserRating)
+  controllerWrapper(info.updateUserRating)
 );
 
 module.exports = router;
