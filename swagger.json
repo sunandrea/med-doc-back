@@ -167,7 +167,7 @@
         }
       }
     },
-    "api/info/update/rating": {
+    "api/info/update/rating/{id}": {
       "patch": {
         "tags": ["Info"],
         "summary": "update user's info",
@@ -425,13 +425,8 @@
       },
       "UpdateRating": {
         "type": "object",
-        "required": ["id", "rating"],
+        "required": ["rating"],
         "properties": {
-          "id": {
-            "type": "string",
-            "example": "64417972d4e00b5a6bb8389a"
-          },
-
           "rating": {
             "type": "number",
             "example": 5

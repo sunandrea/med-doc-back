@@ -1,22 +1,20 @@
+const { default: mongoose } = require("mongoose");
 const { User } = require("../../models/users.model");
+const { createError } = require("../../helpers");
 
-const UpdateUserRating = async (req, res) => {
+const updateUserRating = async (req, res) => {
   const user = req.user;
   const newRating = req.body.rating;
+  const objectId = mongoose.Types.ObjectId.createFromHexString(req.params.id);
 
-  const doctor = await User.findById(req.body.id);
+  const doctor = await User.findById(objectId);
   const currentUserRating = doctor.allRating.find(
     (element) => element.user.toString() === user._id.toString()
   );
-  console.log(currentUserRating.rating);
-
-  // if (!newRating) {
-  //   if (!currentUserRating) {
-  //     return res.status(200).json({ rating: 0 });
-  //   } else {
-  //     return res.status(200).json({ rating: currentUserRating.rating });
-  //   }
-  // }
+  if (!doctor) {
+    const error = createError(404, "User not found");
+    throw error;
+  }
 
   if (currentUserRating) {
     currentUserRating.rating = newRating;
@@ -39,4 +37,4 @@ const UpdateUserRating = async (req, res) => {
   res.status(200).send(doctor);
 };
 
-module.exports = UpdateUserRating;
+module.exports = updateUserRating;
