@@ -452,7 +452,7 @@
           },
           "date": {
             "type": "string",
-            "example": "22/02/2022"
+            "example": "MM-DD-YYY"
           }
         }
       },
@@ -501,7 +501,7 @@
           },
           "date": {
             "type": "string",
-            "example": "22/02/2022"
+            "example": "MM-DD-YYY"
           }
         }
       },
@@ -524,7 +524,7 @@
           },
           "time": {
             "type": "string",
-            "example": "22/02/2022"
+            "example": "MM-DD-YYY"
           }
         }
       }

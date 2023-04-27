@@ -1,27 +1,31 @@
+const { createError } = require("../../helpers");
 const { Visit } = require("../../models/visits.model");
 
 const getAllVisits = async (req, res, next) => {
-  //   const page = req.query.page || 1;
-  //   const limit = req.query.limit || 0;
-  //   const query = { patient: req.user._id };
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 0;
+
+  const skipSize = (page - 1) * limit;
 
   let visits;
-  //   if (limit > 0) {
-  //     const skipSize = (page - 1) * limit;
-  //     visits = await Visit.find(query)
-  //       .populate("patient", "-password")
-  //       .skip(skipSize)
-  //       .limit(limit);
-  //   }
+
   if (req.user.role === "Patient") {
     visits = await Visit.find({ patient: req.user._id })
+      .skip(skipSize)
+      .limit(limit)
       .populate({ path: "doctor", select: "name number" })
       .populate({ path: "patient", select: "name number" });
   }
   if (req.user.role === "Doctor") {
     visits = await Visit.find({ doctor: req.user._id })
+      .skip(skipSize)
+      .limit(limit)
       .populate({ path: "doctor", select: "name number" })
       .populate({ path: "patient", select: "name number" });
+  }
+  if (!visits || visits.length === 0) {
+    const error = createError(404, "No visits");
+    throw error;
   }
   res.status(200).json(visits);
 };
