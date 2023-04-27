@@ -43,6 +43,7 @@ const userSchema = Schema(
     birthday: {
       type: Date,
     },
+
     allRating: [
       {
         user: Schema.Types.ObjectId,
@@ -86,5 +87,15 @@ const loginSchema = Joi.object({
   password: Joi.string().min(3).required(),
 });
 
+const updateUserSchema = Joi.object({
+  name: Joi.string().optional(),
+  gender: Joi.string().optional(),
+  birthday: Joi.string().optional(),
+  number: Joi.string().optional(),
+  about: Joi.string().optional(),
+  specialization: Joi.string().optional(),
+  category: Joi.string().optional(),
+});
+
 const User = model("user", userSchema);
-module.exports = { User, registerSchema, loginSchema };
+module.exports = { User, registerSchema, loginSchema, updateUserSchema };

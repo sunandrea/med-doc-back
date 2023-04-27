@@ -1,9 +1,13 @@
 const express = require("express");
-const { authorizeMiddleware } = require("../../middlewares");
+const {
+  authorizeMiddleware,
+  validationMiddleware,
+} = require("../../middlewares");
 const { info } = require("../../controllers/index");
 const controllerWrapper = require("../../helpers/controllerWrapper");
 const uploadCloud = require("../../middlewares/upload.middleware");
 const { updateImage } = require("../../controllers/info");
+const { updateUserSchema } = require("../../models/users.model");
 
 const router = express.Router();
 
@@ -23,6 +27,7 @@ router.patch(
 router.patch(
   "/update",
   authorizeMiddleware,
+  validationMiddleware(updateUserSchema),
   controllerWrapper(info.updateUserInfo)
 );
 
