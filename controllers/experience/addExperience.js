@@ -2,7 +2,6 @@ const { createError } = require("../../helpers");
 const { User } = require("../../models/users.model");
 
 const addExperience = async (req, res, next) => {
-  console.log(req.user._id);
   const user = await User.findById(req.user._id);
   if (!user) {
     const error = createError(404, "User not found");
@@ -11,7 +10,8 @@ const addExperience = async (req, res, next) => {
 
   user.experience.push(req.body);
   await user.save();
-  res.status(201).send(user);
+  const { password, ...newUser } = user._doc;
+  res.status(201).send(newUser);
 };
 
 module.exports = addExperience;

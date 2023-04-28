@@ -1,13 +1,18 @@
 const express = require("express");
-const { authorizeMiddleware } = require("../../middlewares");
+const {
+  authorizeMiddleware,
+  validationMiddleware,
+} = require("../../middlewares");
 const controllerWrapper = require("../../helpers/controllerWrapper");
 const { experience } = require("../../controllers");
+const { addUserExperienceSchema } = require("../../models/users.model");
 
 const router = express.Router();
 
 router.post(
   "/",
   authorizeMiddleware,
+  validationMiddleware(addUserExperienceSchema),
   controllerWrapper(experience.addExperience)
 );
 

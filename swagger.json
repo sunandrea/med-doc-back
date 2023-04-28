@@ -509,20 +509,24 @@
         "type": "object",
         "required": ["doctor", "date", "time"],
         "properties": {
-          "specialization": {
+          "institution": {
             "type": "string",
             "example": "Text"
+          },
+          "institutionLogo": {
+            "type": "string",
+            "example": "logo url"
           },
 
-          "doctor": {
+          "description": {
             "type": "string",
             "example": "Text"
           },
-          "date": {
+          "startDate": {
             "type": "string",
             "example": "10:30-11:300"
           },
-          "time": {
+          "endDate": {
             "type": "string",
             "example": "MM-DD-YYY"
           }
