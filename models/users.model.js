@@ -21,6 +21,9 @@ const userSchema = Schema(
       required: [true, "Role is required"],
       enum: ["Patient", "Doctor"],
     },
+    patientStatus: {
+      type: String,
+    },
 
     rating: {
       type: Number,
@@ -54,9 +57,10 @@ const userSchema = Schema(
     experience: [
       {
         institution: { type: String },
+        institutionLogo: { type: String },
         description: { type: String },
-        startDate: { type: String },
-        endDate: { type: String },
+        startDate: { type: Date },
+        endDate: { type: Date },
       },
     ],
     token: String,
@@ -80,11 +84,20 @@ const registerSchema = Joi.object({
   number: Joi.string().required(),
   password: Joi.string().min(3).required(),
   role: Joi.string().valid("Doctor", "Patient").required(),
+  patientStatus: Joi.string().optional(),
 });
 
 const loginSchema = Joi.object({
   number: Joi.string().required(),
   password: Joi.string().min(3).required(),
+});
+
+const addUserExperienceSchema = Joi.object({
+  institution: Joi.string().required(),
+  institutionLogo: Joi.string().optional(),
+  description: Joi.string().required(),
+  startDate: Joi.string().required(),
+  endDate: Joi.string().required(),
 });
 
 const updateUserSchema = Joi.object({
@@ -98,4 +111,10 @@ const updateUserSchema = Joi.object({
 });
 
 const User = model("user", userSchema);
-module.exports = { User, registerSchema, loginSchema, updateUserSchema };
+module.exports = {
+  User,
+  registerSchema,
+  loginSchema,
+  addUserExperienceSchema,
+  updateUserSchema,
+};
