@@ -373,7 +373,7 @@
           },
           "role": {
             "type": "string",
-            "example": "Doctor"
+            "example": "doctor"
           }
         }
       },
@@ -439,7 +439,7 @@
         "properties": {
           "doctor": {
             "type": "string",
-            "example": "Doctor id -> 64417972d4e00b5a6bb8389a"
+            "example": "doctor id -> 64417972d4e00b5a6bb8389a"
           },
 
           "specialization": {

@@ -8,6 +8,8 @@ const register = async (req, res) => {
   const { name, number, password, role } = req.body;
   const user = await User.findOne({ number });
   if (user) {
+    res.status(409);
+
     throw new Conflict(`Number in use`);
   }
   const avatarURL =
@@ -15,7 +17,7 @@ const register = async (req, res) => {
   const hashPassword = await bcrypt.hash(password, bcrypt.genSaltSync(10));
   const verificationToken = uuid();
   let result;
-  if (role === "Patient") {
+  if (role === "patient") {
     result = await User.create({
       name,
       number,
