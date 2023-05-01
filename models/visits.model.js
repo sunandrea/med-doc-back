@@ -42,16 +42,7 @@ const visitSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: "user",
     },
-    files: [
-      {
-        name: {
-          type: String,
-        },
-        url: {
-          type: String,
-        },
-      },
-    ],
+    pdfURL: String,
   },
   { versionKey: false, timestamps: true }
 );
@@ -76,6 +67,7 @@ const visitUpdateSchema = Joi.object({
   bodyCondition: Joi.string().min(1).optional(),
   clinicalDiagnosis: Joi.string().min(1).optional(),
   recomendation: Joi.string().min(1).optional(),
+  pdfURL: Joi.string(),
 });
 
 const Visit = model("visit", visitSchema);
