@@ -42,6 +42,16 @@ const visitSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: "user",
     },
+    files: [
+      {
+        name: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );
