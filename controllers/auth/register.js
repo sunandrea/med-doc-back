@@ -17,7 +17,7 @@ const register = async (req, res) => {
   const hashPassword = await bcrypt.hash(password, bcrypt.genSaltSync(10));
   const verificationToken = uuid();
   let result;
-  if (role === "patient") {
+  if (role === "Patient") {
     result = await User.create({
       name,
       number,

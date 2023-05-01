@@ -19,7 +19,7 @@ const userSchema = Schema(
     role: {
       type: String,
       required: [true, "Role is required"],
-      enum: ["patient", "doctor"],
+      enum: ["Patient", "Doctor"],
     },
     patientStatus: {
       type: String,
@@ -83,7 +83,7 @@ const registerSchema = Joi.object({
   name: Joi.string().required(),
   number: Joi.string().required(),
   password: Joi.string().min(3).required(),
-  role: Joi.string().valid("doctor", "patient").required(),
+  role: Joi.string().valid("Doctor", "Patient").required(),
   patientStatus: Joi.string().optional(),
 });
 
