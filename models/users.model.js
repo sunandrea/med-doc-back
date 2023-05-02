@@ -66,15 +66,6 @@ const userSchema = Schema(
     token: String,
 
     avatarURL: String,
-
-    verify: {
-      type: Boolean,
-      default: false,
-    },
-    verificationToken: {
-      type: String,
-      default: "",
-    },
   },
   { versionKey: false, timestamps: true }
 );
