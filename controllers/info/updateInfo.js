@@ -8,9 +8,11 @@ const updateUserInfo = async (req, res) => {
   if (JSON.stringify(user) === JSON.stringify(newUser)) {
     return res.status(400).json({ message: "Data not modified" });
   }
-  await User.findByIdAndUpdate(user._id, newUser);
+  const updatedUser = await User.findByIdAndUpdate(user._id, newUser, {
+    new: true,
+  }).select("-password");
 
-  res.status(200).json({ message: "Information has been updated" });
+  res.status(200).json(updatedUser);
 };
 
 module.exports = updateUserInfo;
