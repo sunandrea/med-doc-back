@@ -2,6 +2,8 @@ const { createError } = require("../../helpers");
 const { User } = require("../../models/users.model");
 
 const addExperience = async (req, res, next) => {
+  console.log(req.user);
+  console.log(req.body);
   const user = await User.findById(req.user._id);
   if (!user) {
     const error = createError(404, "User not found");
