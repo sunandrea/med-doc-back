@@ -34,7 +34,7 @@ const updateUserRating = async (req, res) => {
   doctor.rating = Math.round((sumRating / doctor.allRating.length) * 10) / 10;
   await doctor.save();
 
-  res.status(200).send(doctor);
+  res.status(200).json({ message: "information has been updated" });
 };
 
 module.exports = updateUserRating;
