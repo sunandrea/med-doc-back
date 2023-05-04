@@ -22,7 +22,7 @@ const upload = multer();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 const corsOptions = {
   origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
