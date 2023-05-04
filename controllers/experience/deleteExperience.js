@@ -17,7 +17,9 @@ const deleteExperience = async (req, res, next) => {
   }
   user.experience.splice(experienceIndex, 1);
   await user.save();
-  res.status(200).json(user);
+  const { password, ...updatedUser } = user._doc;
+
+  res.status(200).json(updatedUser);
 };
 
 module.exports = deleteExperience;

@@ -10,13 +10,23 @@ const authRouter = require("./routes/api/auth");
 const infoRouter = require("./routes/api/info");
 
 const experienceRouter = require("./routes/api/experience");
-const { visitRouter, appointmentRouter } = require("./routes/api");
+const {
+  visitRouter,
+  appointmentRouter,
+  institutionRouter,
+} = require("./routes/api");
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
 app.use(logger(formatsLogger));
-app.use(cors());
+app.use(cors(corsOptions));
+// app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
@@ -24,6 +34,7 @@ app.use("/api/info", infoRouter);
 app.use("/api/visits", visitRouter);
 app.use("/api/experience", experienceRouter);
 app.use("/api/appointment", appointmentRouter);
+app.use("/api/institution", institutionRouter);
 app.use("/api-docs", swaggerUi.serve);
 app.get("/api-docs", swaggerUi.setup(swaggerDocument));
 app.use((req, res) => {

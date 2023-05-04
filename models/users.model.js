@@ -27,9 +27,11 @@ const userSchema = Schema(
 
     rating: {
       type: Number,
+      default: 0,
     },
-    coast: {
+    price: {
       type: Number,
+      default: 100,
     },
     about: {
       type: String,
@@ -66,15 +68,6 @@ const userSchema = Schema(
     token: String,
 
     avatarURL: String,
-
-    verify: {
-      type: Boolean,
-      default: false,
-    },
-    verificationToken: {
-      type: String,
-      default: "",
-    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -108,6 +101,7 @@ const updateUserSchema = Joi.object({
   about: Joi.string().optional(),
   specialization: Joi.string().optional(),
   category: Joi.string().optional(),
+  price: Joi.string().optional(),
 });
 
 const User = model("user", userSchema);

@@ -27,7 +27,8 @@ const updateExperience = async (req, res, next) => {
   };
 
   await user.save();
-  res.status(200).json(user.experience[experienceIndex]);
+  const { password, ...updatedUser } = user._doc;
+  res.status(200).json(updatedUser);
 };
 
 module.exports = updateExperience;

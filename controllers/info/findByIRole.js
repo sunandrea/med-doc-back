@@ -14,10 +14,12 @@ const findUsersByRole = async (req, res) => {
   }
   const users = await User.find({ role: req.params.role })
     .skip(skipSize)
-    .limit(limit);
+    .limit(limit)
+    .select("-password -token");
   if (!users) {
     res.status(404).json({ message: "Not found" });
   }
+
   res.status(200).json(users);
 };
 

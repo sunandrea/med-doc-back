@@ -19,6 +19,7 @@ const authorizeMiddleware = async (req, res, next) => {
       next(createError(401, "Not authorized"));
     }
     req.user = user;
+    // console.log(user);
     next();
   } catch (error) {
     next(createError(401, "Token is invalid"));
