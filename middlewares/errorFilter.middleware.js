@@ -1,6 +1,6 @@
 const errorFilter = (error, req, res, next) => {
-  const { status = 500, message = "Something went wrong" } = error;
-  res.status(status).json({ message });
+  const { status = 500 } = error;
+  res.status(status).json(error);
 };
 
 module.exports = errorFilter;
