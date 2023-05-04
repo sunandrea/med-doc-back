@@ -29,8 +29,9 @@ const userSchema = Schema(
       type: Number,
       default: 0,
     },
-    coast: {
+    price: {
       type: Number,
+      default: 100,
     },
     about: {
       type: String,
