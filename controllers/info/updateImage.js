@@ -19,7 +19,7 @@ const updateImage = async (req, res) => {
     res.status(200).json(result);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Помилка оновлення аватару" });
+    res.status(500).json({ message: "Помилка оновлення аватару" });
   }
 };
 
