@@ -20,13 +20,9 @@ const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:3001",
-  })
-);
+
 app.use("/api/auth", authRouter);
 app.use("/api/info", infoRouter);
 app.use("/api/visits", visitRouter);
