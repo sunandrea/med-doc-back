@@ -101,6 +101,7 @@ const updateUserSchema = Joi.object({
   about: Joi.string().optional(),
   specialization: Joi.string().optional(),
   category: Joi.string().optional(),
+  price: Joi.string().optional(),
 });
 
 const User = model("user", userSchema);

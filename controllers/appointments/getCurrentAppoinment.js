@@ -13,15 +13,15 @@ const getCurrentAppointment = async (req, res, next) => {
     appointments = await Appointment.find({ patient: req.user._id })
       .skip(skipSize)
       .limit(limit)
-      .populate("doctor", "name")
-      .populate("patient", "name");
+      .populate("doctor", "name avatarURL birthday number gender")
+      .populate("patient", "name avatarURL birthday number gender");
   }
   if (req.user.role === "Doctor") {
     appointments = await Appointment.find({ doctor: req.user._id })
       .skip(skipSize)
       .limit(limit)
-      .populate("doctor", "name")
-      .populate("patient", "name");
+      .populate("doctor", "name avatarURL birthday number gender")
+      .populate("patient", "name avatarURL birthday number gender");
   }
 
   if (!appointments || appointments.length === 0) {
