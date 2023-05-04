@@ -6,6 +6,8 @@ const register = async (req, res) => {
   const { name, number, password, role } = req.body;
   const user = await User.findOne({ number });
   if (user) {
+    res.status(409);
+
     throw new Conflict(`Number in use`);
   }
   const avatarURL =
