@@ -2,9 +2,8 @@ const { default: mongoose } = require("mongoose");
 const { Appointment } = require("../../models/appointments.model");
 
 const addAppointment = async (req, res, next) => {
-  const doctorObjectId = mongoose.Types.ObjectId.createFromHexString(
-    req.body.doctor
-  );
+  const doctorObjectId = new mongoose.Types.ObjectId(req.body.doctor);
+
   const appointment = await Appointment.create({
     specialization: req.body.specialization,
     doctor: doctorObjectId,
