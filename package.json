@@ -2,10 +2,12 @@
   "name": "template",
   "version": "0.0.0",
   "private": true,
-  "node": " 18.5.0",
+  "engines": {
+    "node": ">= 18.5.0"
+  },
   "scripts": {
     "start": "node ./server.js",
-    "start:dev": "node ./server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js"
   },
