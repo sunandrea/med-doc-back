@@ -4,7 +4,7 @@ const { Appointment } = require("../../models/appointments.model");
 const getAppointment = async (req, res, next) => {
   const { id } = req.params;
 
-  const appointment = await Appointment.findById(id);
+  const appointment = await Appointment.find({ doctor: id });
   if (!appointment) {
     const error = createError(404, "Not found");
     throw error;

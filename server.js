@@ -10,7 +10,6 @@ const startServer = async () => {
       console.log(`Database connection successful in port ${process.env.PORT}`)
     );
   } catch (error) {
-    console.log(error);
     process.exit(1);
   }
 };
