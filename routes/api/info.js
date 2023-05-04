@@ -21,7 +21,7 @@ router.patch(
   "/update/image",
   authorizeMiddleware,
   uploadCloud.single("image"),
-  updateImage
+  controllerWrapper(updateImage)
 );
 
 router.patch(
