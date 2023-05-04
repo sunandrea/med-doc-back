@@ -27,6 +27,7 @@ const userSchema = Schema(
 
     rating: {
       type: Number,
+      default: 0,
     },
     coast: {
       type: Number,
