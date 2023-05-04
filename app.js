@@ -15,8 +15,10 @@ const {
   appointmentRouter,
   institutionRouter,
 } = require("./routes/api");
+const multer = require("multer");
 
 const app = express();
+const upload = multer();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 const corsOptions = {
   origin: "*",
@@ -26,6 +28,7 @@ const corsOptions = {
 
 app.use(logger(formatsLogger));
 app.use(cors(corsOptions));
+app.use(upload.array());
 // app.use(cors());
 app.use(express.json());
 
