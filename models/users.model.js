@@ -92,6 +92,13 @@ const addUserExperienceSchema = Joi.object({
   startDate: Joi.string().required(),
   endDate: Joi.string().required(),
 });
+const updateUserExperienceSchema = Joi.object({
+  institution: Joi.string().optional(),
+  institutionLogo: Joi.string().optional(),
+  description: Joi.string().optional(),
+  startDate: Joi.string().optional(),
+  endDate: Joi.string().optional(),
+});
 
 const updateUserSchema = Joi.object({
   name: Joi.string().optional(),
@@ -111,4 +118,5 @@ module.exports = {
   loginSchema,
   addUserExperienceSchema,
   updateUserSchema,
+  updateUserExperienceSchema,
 };
