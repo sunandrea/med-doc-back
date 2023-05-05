@@ -18,15 +18,15 @@ const {
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
-const corsOptions = {
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
+// const corsOptions = {
+//   origin: "*",
+//   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+// };
 
 app.use(logger(formatsLogger));
-app.use(cors(corsOptions));
-// app.use(cors());
+// app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
