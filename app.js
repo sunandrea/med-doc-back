@@ -4,7 +4,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-const { errorFilter } = require("./middlewares/index");
+// const { errorFilter } = require("./middlewares/index");
 
 const authRouter = require("./routes/api/auth");
 const infoRouter = require("./routes/api/info");

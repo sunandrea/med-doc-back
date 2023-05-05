@@ -13,15 +13,27 @@ const getAllVisits = async (req, res, next) => {
     visits = await Visit.find({ patient: req.user._id })
       .skip(skipSize)
       .limit(limit)
-      .populate({ path: "doctor", select: "name number" })
-      .populate({ path: "patient", select: "name number" });
+      .populate({
+        path: "doctor",
+        select: "name number birthday gender category",
+      })
+      .populate({
+        path: "patient",
+        select: "name number birthday gender category",
+      });
   }
   if (req.user.role === "Doctor") {
     visits = await Visit.find({ doctor: req.user._id })
       .skip(skipSize)
       .limit(limit)
-      .populate({ path: "doctor", select: "name number" })
-      .populate({ path: "patient", select: "name number" });
+      .populate({
+        path: "doctor",
+        select: "name number birthday gender category",
+      })
+      .populate({
+        path: "patient",
+        select: "name number birthday gender category",
+      });
   }
   if (!visits || visits.length === 0) {
     const error = createError(404, "No visits");
