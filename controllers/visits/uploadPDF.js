@@ -3,7 +3,7 @@ const { Visit } = require("../../models/visits.model");
 
 const uploadPDF = async (req, res) => {
   const { id } = req.params;
-
+  console.log(req.file);
   try {
     const visitObjectId = mongoose.Types.ObjectId.createFromHexString(id);
     const visit = await Visit.findById(visitObjectId);
