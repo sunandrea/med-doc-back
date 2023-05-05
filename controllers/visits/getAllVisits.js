@@ -15,11 +15,13 @@ const getAllVisits = async (req, res, next) => {
       .limit(limit)
       .populate({
         path: "doctor",
-        select: "name number birthday gender category",
+        select:
+          "name number birthday gender specialization category avatarURL rating",
       })
       .populate({
         path: "patient",
-        select: "name number birthday gender category",
+        select:
+          "name number birthday gender specialization category avatarURL rating",
       });
   }
   if (req.user.role === "Doctor") {
@@ -28,11 +30,13 @@ const getAllVisits = async (req, res, next) => {
       .limit(limit)
       .populate({
         path: "doctor",
-        select: "name number birthday gender category",
+        select:
+          "name number birthday gender specialization category avatarURL rating",
       })
       .populate({
         path: "patient",
-        select: "name number birthday gender category",
+        select:
+          "name number birthday gender specialization category avatarURL rating",
       });
   }
   if (!visits || visits.length === 0) {
