@@ -8,8 +8,7 @@ const getInstitution = async (req, res, next) => {
     const error = createError(404, "Not Found");
     throw error;
   }
-  console.log(`qwe`);
-  console.log(institution);
+
   res.status(200).json(institution);
 };
 

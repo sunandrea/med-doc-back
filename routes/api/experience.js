@@ -5,7 +5,10 @@ const {
 } = require("../../middlewares");
 const controllerWrapper = require("../../helpers/controllerWrapper");
 const { experience } = require("../../controllers");
-const { addUserExperienceSchema } = require("../../models/users.model");
+const {
+  addUserExperienceSchema,
+  updateUserExperienceSchema,
+} = require("../../models/users.model");
 
 const router = express.Router();
 
@@ -19,6 +22,7 @@ router.post(
 router.patch(
   "/:id",
   authorizeMiddleware,
+  validationMiddleware(updateUserExperienceSchema),
   controllerWrapper(experience.updateExperience)
 );
 
