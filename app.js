@@ -4,7 +4,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-// const { errorFilter } = require("./middlewares/index");
+const { errorFilter } = require("./middlewares/index");
 
 const authRouter = require("./routes/api/auth");
 const infoRouter = require("./routes/api/info");
@@ -18,14 +18,8 @@ const {
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
-// const corsOptions = {
-//   origin: "*",
-//   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-//   allowedHeaders: ["Content-Type", "Authorization"],
-// };
 
 app.use(logger(formatsLogger));
-// app.use(cors(corsOptions));
 app.use(cors());
 app.use(express.json());
 
@@ -47,11 +41,6 @@ app.use((err, req, res, next) => {
   res.status(err.status).json({ message: err.message });
 });
 
-app.use((err, req, res, next) => {
-  console.log(err);
-  const { status, message } = err;
-  res.status(status).json({ message: message });
-});
-// app.use(errorFilter);
+app.use(errorFilter);
 
 module.exports = app;
