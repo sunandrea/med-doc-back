@@ -18,7 +18,7 @@ const appointmentSchema = new Schema(
       ref: "user",
     },
     date: {
-      type: String,
+      type: Date,
       required: true,
     },
     time: {
