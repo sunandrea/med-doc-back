@@ -37,8 +37,9 @@ app.use((req, res) => {
 
 app.use((err, req, res, next) => {
   console.log(err);
-
-  res.status(err.status).json({ message: err.message });
+  const status = err.status || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(status).json({ message: message });
 });
 
 app.use(errorFilter);
