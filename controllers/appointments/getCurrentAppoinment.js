@@ -7,28 +7,40 @@ const getCurrentAppointment = async (req, res, next) => {
 
   const skipSize = (page - 1) * limit;
 
-  let appointments;
+  let appointments = [];
 
   if (req.user.role === "Patient") {
     appointments = await Appointment.find({ patient: req.user._id })
       .skip(skipSize)
       .limit(limit)
-      .populate("doctor", "name avatarURL birthday number gender")
-      .populate("patient", "name avatarURL birthday number gender");
+      .populate(
+        "doctor",
+        "name avatarURL birthday specialization rating number gender"
+      )
+      .populate(
+        "patient",
+        "name avatarURL birthday specialization rating number gender"
+      );
   }
   if (req.user.role === "Doctor") {
     appointments = await Appointment.find({ doctor: req.user._id })
       .skip(skipSize)
       .limit(limit)
-      .populate("doctor", "name avatarURL birthday number gender")
-      .populate("patient", "name avatarURL birthday number gender");
+      .populate(
+        "doctor",
+        "name avatarURL birthday specialization rating number gender"
+      )
+      .populate(
+        "patient",
+        "name avatarURL birthday specialization rating number gender"
+      );
   }
 
-  if (!appointments || appointments.length === 0) {
+  if (!appointments) {
     const error = createError(404, "No appointments");
     throw error;
   }
-  res.status(200).send(appointments);
+  res.status(200).json(appointments);
 };
 
 module.exports = getCurrentAppointment;
