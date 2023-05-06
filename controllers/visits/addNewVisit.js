@@ -19,9 +19,7 @@ const addVisit = async (req, res, next) => {
     doctor: req.user._id,
     patient: patientObjectId,
     date: req.body.date,
-  })
-    .populate("doctor", "name number")
-    .populate("patient", "name number");
+  });
 
   const visits = await Visit.find({ patient: patientObjectId });
   if (visits.length > 1) {
