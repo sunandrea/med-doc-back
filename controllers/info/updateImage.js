@@ -3,8 +3,15 @@ const { User } = require("../../models/users.model");
 
 const updateImage = async (req, res) => {
   const { _id: id } = req.user;
+  if (!req.file) {
+    const error = createError(400, "No file");
+    throw error;
+  }
 
-  // try {
+  if (!req.user) {
+    const error = createError(401, "User not authenticated");
+    throw error;
+  }
   const result = await User.findByIdAndUpdate(
     { _id: id },
     { $set: { avatarURL: req.file.path } },
@@ -17,10 +24,6 @@ const updateImage = async (req, res) => {
   }
 
   res.status(200).json(result);
-  // } catch (err) {
-  //   console.error(err);
-  //   res.status(500).json({ message: "Помилка оновлення аватару" });
-  // }
 };
 
 module.exports = updateImage;
