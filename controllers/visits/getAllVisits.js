@@ -7,7 +7,7 @@ const getAllVisits = async (req, res, next) => {
 
   const skipSize = (page - 1) * limit;
 
-  let visits;
+  let visits = [];
 
   if (req.user.role === "Patient") {
     visits = await Visit.find({ patient: req.user._id })
@@ -39,8 +39,8 @@ const getAllVisits = async (req, res, next) => {
           "name number birthday gender specialization category avatarURL rating",
       });
   }
-  if (!visits || visits.length === 0) {
-    const error = createError(404, "No visits");
+  if (!visits) {
+    const error = createError(404, "Not Found");
     throw error;
   }
   res.status(200).json(visits);
