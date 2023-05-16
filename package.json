@@ -23,7 +23,7 @@
     "express-joi-validation": "^5.0.1",
     "gravatar": "^1.8.2",
     "jimp": "^0.22.7",
-    "joi": "^17.8.4",
+    "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.2",
     "morgan": "1.10.0",
